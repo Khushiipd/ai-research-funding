@@ -45,3 +45,26 @@ def create_profile(profile: schemas.ResearchProfileCreate,
     return {
         "message": "Research profile created successfully"
     }
+
+@router.post("/publication")
+def create_publication(
+    publication: schemas.PublicationCreate,
+    db: Session = Depends(get_db)
+):
+
+    new_publication = models.Publication(
+        user_id=publication.user_id,
+        title=publication.title,
+        authors=publication.authors,
+        journal=publication.journal,
+        year=publication.year,
+        doi=publication.doi
+    )
+
+    db.add(new_publication)
+    db.commit()
+    db.refresh(new_publication)
+
+    return {
+        "message": "Publication added successfully"
+    }
