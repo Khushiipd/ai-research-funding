@@ -22,3 +22,10 @@ class PublicationCreate(BaseModel):
     journal: str
     year: str
     doi: str
+
+class PatentCreate(BaseModel):
+    user_id: int
+    patent_title: str
+    patent_number: str
+    status: str
+    filing_year: str

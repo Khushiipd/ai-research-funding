@@ -68,3 +68,25 @@ def create_publication(
     return {
         "message": "Publication added successfully"
     }
+
+@router.post("/patent")
+def create_patent(
+    patent: schemas.PatentCreate,
+    db: Session = Depends(get_db)
+):
+
+    new_patent = models.Patent(
+        user_id=patent.user_id,
+        patent_title=patent.patent_title,
+        patent_number=patent.patent_number,
+        status=patent.status,
+        filing_year=patent.filing_year
+    )
+
+    db.add(new_patent)
+    db.commit()
+    db.refresh(new_patent)
+
+    return {
+        "message": "Patent added successfully"
+    }
