@@ -27,3 +27,17 @@ class ResearchProfile(Base):
     bio = Column(String)
 
     user = relationship("User")
+
+class Publication(Base):
+    __tablename__ = "publications"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+
+    title = Column(String)
+    authors = Column(String)
+    journal = Column(String)
+    year = Column(String)
+    doi = Column(String)
+
+    user = relationship("User")
