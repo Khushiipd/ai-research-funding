@@ -41,3 +41,16 @@ class Publication(Base):
     doi = Column(String)
 
     user = relationship("User")
+
+class Patent(Base):
+    __tablename__ = "patents"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+
+    patent_title = Column(String)
+    patent_number = Column(String)
+    status = Column(String)
+    filing_year = Column(String)
+
+    user = relationship("User")
