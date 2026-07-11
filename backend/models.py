@@ -9,3 +9,21 @@ class User(Base):
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
     role = Column(String, nullable=False)
+
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
+
+
+class ResearchProfile(Base):
+    __tablename__ = "research_profiles"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    organization = Column(String)
+    designation = Column(String)
+    research_domain = Column(String)
+    experience = Column(String)
+    skills = Column(String)
+    bio = Column(String)
+
+    user = relationship("User")
